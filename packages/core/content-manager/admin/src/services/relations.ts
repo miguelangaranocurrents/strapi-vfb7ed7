@@ -126,6 +126,13 @@ const relationsApi = contentManagerApi.injectEndpoints({
           endpointName,
           model: queryArgs.model,
           targetField: queryArgs.targetField,
+          /**
+           * The source document/component id is what scopes the results (which relations are already
+           * connected). Without it, two fields sharing a model & target (e.g. two components in a dynamic
+           * zone) would share the same cache entry and show each other's results.
+           */
+          id: queryArgs.params?.id,
+          locale: queryArgs.params?.locale,
           _q: queryArgs.params?._q,
           idsToOmit: queryArgs.params?.idsToOmit,
           idsToInclude: queryArgs.params?.idsToInclude,
